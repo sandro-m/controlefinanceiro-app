@@ -18,7 +18,7 @@ export class CategoriasService {
 
   constructor(private http: HttpClient) { }
 
-  PegarTodas(): Observable<Categoria[]>{
+  PegarTodos(): Observable<Categoria[]>{
     return this.http.get<Categoria[]>(this.url);
   }
 
