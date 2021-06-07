@@ -6,7 +6,7 @@ import { FormGroup, FormControl, FormControlDirective } from '@angular/forms';
 @Component({
   selector: 'app-nova-categoria',
   templateUrl: './nova-categoria.component.html',
-  styleUrls: ['./nova-categoria.component.css']
+  styleUrls: ['../listagem-categorias/listagem-categorias.component.css']
 })
 export class NovaCategoriaComponent implements OnInit {
 
@@ -18,6 +18,7 @@ export class NovaCategoriaComponent implements OnInit {
   ngOnInit(): void {
     this.tiposService.PegarTodos().subscribe(resultado => {
       this.tipos = resultado;
+      console.log(resultado);
     });
 
     this.formulario = new FormGroup({
