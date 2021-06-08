@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Tipo } from 'src/app/models/Tipo';
 import { TiposService } from 'src/app/services/tipos.service';
 import { FormGroup, FormControl, FormControlDirective } from '@angular/forms';
+import { CategoriasService } from 'src/app/services/categorias.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nova-categoria',
@@ -13,7 +15,9 @@ export class NovaCategoriaComponent implements OnInit {
   formulario: any;
   tipos : Tipo[];
 
-  constructor(private tiposService : TiposService) { }
+  constructor(private tiposService : TiposService,
+    private categoriasService : CategoriasService,
+    private router : Router) { }
 
   ngOnInit(): void {
     this.tiposService.PegarTodos().subscribe(resultado => {
@@ -30,5 +34,13 @@ export class NovaCategoriaComponent implements OnInit {
 
   get propriedade () {
     return this.formulario.controls;
+  }
+
+  EnviarFormulario(): void {
+    const categoria = this.formulario.value;
+
+    this.categoriasService.NovaCategoria(categoria).subscribe(resultado => {
+    this.router.navigate(['categorias/listagemcategorias']);
+    });
   }
 }
